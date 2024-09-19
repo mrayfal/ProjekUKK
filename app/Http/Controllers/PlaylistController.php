@@ -24,23 +24,31 @@ class PlaylistController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'folder_path' => 'required|string',
+            'songs' => 'required',
+            'songs.*' => 'mimes:mp3|max:10240', // Setiap file harus mp3 dan max 10MB
         ]);
     
+        // Simpan playlist di database
         $playlist = new Playlist();
         $playlist->name = $request->name;
-        $playlist->songs_folder = $request->folder_path;
+        $playlist->songs_folder = 'playlists/' . $playlist->name; // Misalnya disimpan di folder 'playlists/Nama Playlist'
         $playlist->save();
     
-        return redirect()->route('playlists.create')->with('success', 'Playlist berhasil dibuat.');
-    }
+        // Simpan file lagu ke folder yang sesuai
+        foreach ($request->file('songs') as $song) {
+            $song->storeAs($playlist->songs_folder, $song->getClientOriginalName(), 'public');
+        }
+    
+        return redirect()->route('playlists.index')->with('success', 'Playlist berhasil dibuat.');
+    }   
 
     public function show(Playlist $playlist)
     {
-        // Ambil daftar lagu dari folder playlist (misalnya menggunakan Storage atau fungsi filesystem)
-        $songs = Storage::files($playlist->songs_folder);
-    
+        // Dapatkan daftar file dari folder yang bersangkutan
+        $songs = Storage::disk('public')->files($playlist->songs_folder);
+
         return view('playlists.show', compact('playlist', 'songs'));
+    
     }
     
 
@@ -48,52 +56,72 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::findOrFail($id);
 
-    // Ambil semua file MP3 dari folder
-    $folderPath = public_path($playlist->songs_folder);
-    if (File::exists($folderPath)) {
-        $mp3Files = File::files($folderPath);
-        $songs = array_filter($mp3Files, function ($file) {
-            return strtolower($file->getExtension()) === 'mp3';
-        });
-    } else {
-        $songs = [];
-    }
-
-    return view('playlists.edit', compact('playlist', 'songs'));
-}
-    public function addSong(Request $request, $id)
-    {
-        $playlist = Playlist::findOrFail($id);
-
-        $request->validate([
-            'new_song' => 'required|file|mimes:mp3',
-        ]);
-
-        // Simpan file ke folder yang sesuai
-        $folderPath = public_path($playlist->songs_folder);
-        $newSong = $request->file('new_song');
-        $newSong->move($folderPath, $newSong->getClientOriginalName());
-
-        return redirect()->route('playlists.edit', $playlist->id)->with('success', 'Lagu berhasil ditambahkan.');
-    }
-
-    public function deleteSong(Request $request, $id)
-    {
-        $playlist = Playlist::findOrFail($id);
-
-        $request->validate([
-            'song_name' => 'required',
-        ]);
-
-        // Hapus file dari folder
-        $filePath = public_path($playlist->songs_folder . '/' . $request->song_name);
-        if (File::exists($filePath)) {
-            File::delete($filePath);
-            return redirect()->route('playlists.edit', $playlist->id)->with('success', 'Lagu berhasil dihapus.');
+        // Cek folder path di storage/public atau storage/app/public tergantung penyimpanan
+        $folderPath = storage_path('app/public/' . $playlist->songs_folder); 
+    
+        if (File::exists($folderPath)) {
+            $mp3Files = File::files($folderPath);
+    
+            // Filter hanya file mp3
+            $songs = array_filter($mp3Files, function ($file) {
+                return strtolower($file->getExtension()) === 'mp3';
+            });
+        } else {
+            $songs = [];
         }
+    
+        return view('playlists.edit', compact('playlist', 'songs'));
+}
+public function addSong(Request $request, $id)
+{
+    // Validasi input lagu harus dalam format MP3
+    $request->validate([
+        'new_song' => 'required|file|mimes:mp3',
+    ]);
 
-        return redirect()->route('playlists.edit', $playlist->id)->with('error', 'Lagu tidak ditemukan.');
+    // Ambil playlist berdasarkan ID
+    $playlist = Playlist::findOrFail($id);
+
+    // Tentukan folder path tempat file lagu akan disimpan
+    $folderPath = storage_path('app/public/' . $playlist->songs_folder);
+
+    // Cek apakah folder path ada, jika tidak buat folder tersebut
+    if (!File::exists($folderPath)) {
+        File::makeDirectory($folderPath, 0755, true);
     }
+
+    // Ambil file lagu yang diupload
+    $newSong = $request->file('new_song');
+
+    // Pindahkan file ke folder yang sesuai
+    $newSong->move($folderPath, $newSong->getClientOriginalName());
+
+    return redirect()->route('playlists.edit', $playlist->id)->with('success', 'Lagu berhasil ditambahkan.');
+}
+public function deleteSong(Request $request, $id)
+{
+    // Validasi bahwa nama file lagu diinputkan
+    $request->validate([
+        'song_name' => 'required',
+    ]);
+
+    // Ambil playlist berdasarkan ID
+    $playlist = Playlist::findOrFail($id);
+
+    // Tentukan file path dari lagu yang akan dihapus
+    $filePath = storage_path('app/public/' . $playlist->songs_folder . '/' . $request->song_name);
+
+    // Cek apakah file ada di folder
+    if (File::exists($filePath)) {
+        // Hapus file dari folder
+        File::delete($filePath);
+
+        return redirect()->route('playlists.edit', $playlist->id)->with('success', 'Lagu berhasil dihapus.');
+    }
+
+    // Jika file tidak ditemukan, berikan pesan error
+    return redirect()->route('playlists.edit', $playlist->id)->with('error', 'Lagu tidak ditemukan.');
+}
 
     public function update(Request $request, $id)
     {
@@ -113,16 +141,23 @@ class PlaylistController extends Controller
     public function destroy($id)
     {
         $playlist = Playlist::findOrFail($id);
+    // Ambil playlist berdasarkan ID
+    $playlist = Playlist::findOrFail($id);
 
-        // Hapus semua lagu di folder
-        $folderPath = public_path($playlist->songs_folder);
-        if (File::exists($folderPath)) {
-            File::deleteDirectory($folderPath);
-        }
+    // Tentukan folder path dari playlist yang akan dihapus
+    $folderPath = storage_path('app/public/' . $playlist->songs_folder);
 
-        // Hapus playlist dari database
-        $playlist->delete();
-
-        return redirect()->route('playlists.index')->with('success', 'Playlist berhasil dihapus.');
+    // Cek apakah folder playlist ada
+    if (File::exists($folderPath)) {
+        // Hapus semua isi folder terlebih dahulu, kemudian hapus folder itu sendiri
+        File::deleteDirectory($folderPath);
     }
+
+    // Hapus playlist dari database
+    $playlist->delete();
+
+    // Redirect ke halaman daftar playlist dengan pesan sukses
+    return redirect()->route('playlists.index')->with('success', 'Playlist dan folder terkait berhasil dihapus.');
 }
+    }
+
