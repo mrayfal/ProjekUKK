@@ -8,7 +8,7 @@
     <ul class="list-group">
         @foreach($songs as $song)
             <li class="list-group-item">
-                <strong>{{ basename($song) }}</strong>
+                <p><b>{{ basename($song) }}</b></p>
                 <audio controls>
                     <source src="{{ Storage::url($song) }}" type="audio/mpeg">
                     Your browser does not support the audio element.

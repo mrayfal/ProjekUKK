@@ -5,7 +5,6 @@
     <div class="col-md-4">
         <div class="card shadow-lg p-4" style="border-radius: 10px;">
             <div class="text-center mb-4">
-                <!-- Logo atau icon di atas form -->
                 <h3 class="mt-3">Login</h3>
             </div>
 
