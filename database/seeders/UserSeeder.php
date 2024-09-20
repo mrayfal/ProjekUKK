@@ -8,18 +8,22 @@ use App\Models\User;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        // Buat user baru
+        // Membuat admin
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
-            'password' => Hash::make('password123'), // Password di-hash agar terenkripsi
+            'password' => bcrypt('adminpassword'),
+            'role' => 'admin', // Role admin
+        ]);
+
+        // Membuat user biasa
+        User::create([
+            'name' => 'Regular User',
+            'email' => 'user@example.com',
+            'password' => bcrypt('userpassword'),
+            'role' => 'user', // Role user biasa
         ]);
     }
 }

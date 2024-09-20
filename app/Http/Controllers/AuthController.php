@@ -21,15 +21,18 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
+    
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard')->with('success', 'Login berhasil!');
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Login berhasil sebagai Admin!');
+            } else {
+                return redirect()->route('user.playlists')->with('success', 'Login berhasil sebagai User!'); // Pastikan rute ini ada
+            }
         }
-
-        return back()->withErrors(['email' => 'Email atau password salah.']);
+        
     }
+    
 
     // Proses logout
     public function logout()

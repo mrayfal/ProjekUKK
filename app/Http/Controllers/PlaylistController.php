@@ -14,6 +14,18 @@ class PlaylistController extends Controller
         $playlists = Playlist::all();
         return view('playlists.index', compact('playlists'));
     }
+    public function adminDashboard()
+{
+    // Menampilkan dashboard admin
+    return view('admin.dashboard'); // Buat file Blade admin.dashboard
+}
+
+public function userPlaylists()
+{
+    // Menampilkan playlist yang bisa dilihat oleh user
+    $playlists = Playlist::all(); // Sesuaikan dengan akses playlist yang dimiliki user
+    return view('user.playlists', compact('playlists')); // Buat file Blade user.playlists
+}
 
     public function create()
     {
