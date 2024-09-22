@@ -37,23 +37,32 @@ public function userPlaylists()
         $request->validate([
             'name' => 'required|string|max:255',
             'songs' => 'required',
-            'songs.*' => 'mimes:mp3|max:10240', // Setiap file harus mp3 dan max 10MB
+            'songs.*' => 'mimes:mp3|max:30240',
         ]);
     
         // Simpan playlist di database
         $playlist = new Playlist();
         $playlist->name = $request->name;
-        $playlist->songs_folder = 'playlists/' . $playlist->name; // Misalnya disimpan di folder 'playlists/Nama Playlist'
+        $playlist->songs_folder = 'playlists/' . $playlist->name;
         $playlist->save();
     
-        // Simpan file lagu ke folder yang sesuai
-        foreach ($request->file('songs') as $song) {
-            $song->storeAs($playlist->songs_folder, $song->getClientOriginalName(), 'public');
+        // Tes apakah file lagu ada dan disimpan dengan benar
+        if ($request->hasFile('songs')) {
+            foreach ($request->file('songs') as $song) {
+                // Log nama file
+                \Log::info('Menyimpan file: ' . $song->getClientOriginalName());
+    
+                // Simpan file
+                $path = $song->storeAs($playlist->songs_folder, $song->getClientOriginalName(), 'public');
+    
+                // Debug path penyimpanan
+                \Log::info('File disimpan di: ' . $path);
+            }
         }
     
         return redirect()->route('playlists.index')->with('success', 'Playlist berhasil dibuat.');
-    }   
-
+    }
+    
     public function show(Playlist $playlist)
     {
         // Dapatkan daftar file dari folder yang bersangkutan
