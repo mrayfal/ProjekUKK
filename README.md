@@ -4,7 +4,7 @@
 
 ## Tentang Program Saya
 
-Fitur Yang Tersedia
+- Fitur Yang Tersedia <br>
 Halaman Awal (Landing Page)
 Halaman Beranda
 Buku
