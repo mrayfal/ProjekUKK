@@ -20,7 +20,11 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 
 
 ## Akun Default Untuk Pengujian
+-Admin
+<strong>Email :</strong> admin@example.com <strong>Password :</strong>adminpasssword
 
+-User
+<strong>Email :</strong> user@example.com <strong>Password :</strong>userpasssword
 
 ## Contributing
 
