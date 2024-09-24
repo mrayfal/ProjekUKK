@@ -7,19 +7,12 @@
 - Fitur Yang Tersedia <br>
 Halaman Awal (Landing Page)
 Halaman Beranda
-Buku
-Genre Buku (Kategori)
 Authentication
-Register
 Login
-Multi User
+Multi User <br>
 Admin
-Pengguna yang dapat dikelola
-Buku yang dapat dikelola
-Kategori buku yang dapat dikelola
-Melihat semua data
-Generate Laporan (EXCEL, PDF)
-Petugas
+Pengguna yang dapat Menggunakan Fungsi CRUD Mengenai Playlist <br>
+User
 Buku yang dapat dikelola
 Kategori buku yang dapat dikelola
 Melihat semua data
