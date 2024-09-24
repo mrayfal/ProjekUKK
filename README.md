@@ -6,30 +6,15 @@
 
 - Fitur Yang Tersedia <br>
 - Halaman Awal (Landing Page)
-Halaman Beranda
-Authentication
-Login
-Multi User <br>
-Admin
+- Halaman Beranda
+- Authentication
+- Login
+- Logout
+- Multi User <br>
+Admin <br>
 Pengguna yang dapat Menggunakan Fungsi CRUD Mengenai Playlist <br>
-User
-Buku yang dapat dikelola
-Kategori buku yang dapat dikelola
-Melihat semua data
-Generate Laporan (EXCEL, PDF)
-Peminjam
-Mencari Buku
-Memberikan Rating dan Ulasan Buku
-Melihat peminjaman buku sendiri
-Register (membuat akun sebagai peminjam)
-all (semua bisa mengakses)
-Mengulas buku di halaman awal
-Login
-Logout
-Pencarian Halaman Awal
-Buku
-Kategori
-
+User <br>
+Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat admin <br>
 ### Premium Partners
 
 - **[Vehikl](https://vehikl.com/)**
