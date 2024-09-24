@@ -10,10 +10,12 @@
 - Authentication
 - Login
 - Logout
+- Membuat Playlist Lagu
+- Memutar lagu
 - Multi User <br>
-Admin <br>
+<strong>Admin<strong> : <br>
 Pengguna yang dapat Menggunakan Fungsi CRUD Mengenai Playlist <br>
-User <br>
+<strong>User<strong> <br>
 Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat admin <br>
 ### Premium Partners
 
