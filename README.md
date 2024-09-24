@@ -5,7 +5,7 @@
 ## Tentang Program Saya
 
 - Fitur Yang Tersedia <br>
-Halaman Awal (Landing Page)
+- Halaman Awal (Landing Page)
 Halaman Beranda
 Authentication
 Login
