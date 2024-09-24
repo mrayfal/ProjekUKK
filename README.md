@@ -28,7 +28,8 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 
 ## ER Diagram
 
-(https://github.com/mrayfal/ProjekUKK/issues/2#issue-2545179035)
+![WhatsApp Image 2024-09-24 at 6 05 41 PM](https://github.com/user-attachments/assets/5e4ac1e9-873f-4aee-8e7a-43a2e11db103)
+
 
 ## Code of Conduct
 
