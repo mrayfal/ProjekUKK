@@ -36,10 +36,10 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 ![Cuplikan layar 2024-09-24 111313](https://github.com/user-attachments/assets/96523e32-28d1-4202-b8e9-0026a5e492b6)
 
 
-## Security Vulnerabilities
+## Teknologi Yang Digunakan
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Laravel 11
+Bootstrap
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Dibuat Oleh Muhammad Rayfal
