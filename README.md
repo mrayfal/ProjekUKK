@@ -31,7 +31,7 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 ![WhatsApp Image 2024-09-24 at 6 05 41 PM](https://github.com/user-attachments/assets/5e4ac1e9-873f-4aee-8e7a-43a2e11db103)
 
 
-## Code of Conduct
+## UML
 
 In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
