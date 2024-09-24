@@ -33,7 +33,8 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 
 ## UML
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+![Cuplikan layar 2024-09-24 111313](https://github.com/user-attachments/assets/96523e32-28d1-4202-b8e9-0026a5e492b6)
+
 
 ## Security Vulnerabilities
 
