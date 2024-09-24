@@ -26,7 +26,7 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 -User
 <strong>Email :</strong> user@example.com <strong>Password :</strong>userpasssword
 
-## Contributing
+## ER Diagram
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
