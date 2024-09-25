@@ -27,14 +27,11 @@ Pengguna yang dapat Melihat dan memutar lagu dari playlist yang telah dibuat adm
 <strong>Email :</strong> user@example.com <strong>Password :</strong>userpasssword
 
 ## ER Diagram
-
-![WhatsApp Image 2024-09-24 at 6 05 41 PM](https://github.com/user-attachments/assets/5e4ac1e9-873f-4aee-8e7a-43a2e11db103)
+![Cuplikan layar 2024-09-24 111313](https://github.com/user-attachments/assets/96523e32-28d1-4202-b8e9-0026a5e492b6)
 
 
 ## UML
-
-![Cuplikan layar 2024-09-24 111313](https://github.com/user-attachments/assets/96523e32-28d1-4202-b8e9-0026a5e492b6)
-
+![WhatsApp Image 2024-09-24 at 6 05 41 PM](https://github.com/user-attachments/assets/5e4ac1e9-873f-4aee-8e7a-43a2e11db103)
 
 ## Teknologi Yang Digunakan
 
